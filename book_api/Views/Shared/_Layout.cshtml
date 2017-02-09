@@ -8,12 +8,17 @@
 </head>
 <body>
     <!-- Render index.cshtml -->
-    <div>
+    <div class="container">
         @RenderBody()
     </div>
 
     <!-- Render any included scripts or libraries-->
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
+    <script>
+        $("#get_list_btn").click(function () {
+            alert("works");
+        });
+    </script>
 </body>
 </html>
