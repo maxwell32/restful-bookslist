@@ -10,36 +10,69 @@ namespace book_api.Controllers
 {
     public class BooksController : ApiController
     {
+        
+       
+
         // GET api/values, this needs to return a json or xml of books and their descriptors for tabular data
         public IEnumerable<Book> Get()
         {
-            List<Book> bookList = new List<Book>();
-            //create book objects and add to the list
-            Book kiteRunner = new Book
-            {
-                Title = "The Kite Runner",
-                Author = "Khaled H.",
-                Genre = "Realistic Fiction",
-                Publisher = "Penguin"
-            };
-            bookList.Add(kiteRunner);
-
             //return list of books
-            return bookList;
+            return populateList();
         }
 
         // GET api/values/5, for accessing a single book? unneeded but possibly cool
-        public string Get(int id)
+        public Book Get(int id)
         {
-            return $"value: {id}";
+            var tempBookList = populateList();
+            return tempBookList.ElementAt(id);
+        }
+
+        private List<Book> populateList()
+        {
+            List<Book> bookList = new List<Book>();
+            //kite runner
+            Book kiteRunner = new Book
+            {
+                title = "The Kite Runner",
+                authorFName = "Khaled",
+                authorLName = "Hosseini",
+                genre = "Fiction",
+                publisher = "Riverhead Books"
+            };
+            bookList.Add(kiteRunner);
+
+            //the road
+            Book theRoad = new Book
+            {
+                title = "The Road",
+                authorFName = "Cormac",
+                authorLName = "McCarthy",
+                genre = "Fiction",
+                publisher = "Vintage International"
+            };
+            bookList.Add(theRoad);
+
+            //the road
+            Book daVinciCode = new Book
+            {
+                title = "The Da Vinci Code",
+                authorFName = "Dan",
+                authorLName = "Brown",
+                genre = "Fiction",
+                publisher = "Anchor Books"
+            };
+            bookList.Add(daVinciCode);
+
+            return bookList;
         }
     }
 
     public class Book
     {
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string Genre { get; set; }
-        public string Publisher { get; set; }
+        public string title { get; set; }
+        public string authorFName { get; set; }
+        public string authorLName { get; set; }
+        public string genre { get; set; }
+        public string publisher { get; set; }
     }
 }
