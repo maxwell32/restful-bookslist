@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css") <!-- Render my css -->
+    <!-- Render my css -->
+    @Styles.Render("~/Content/css")
 </head>
 <body>
     <!-- Render index.cshtml -->
@@ -22,7 +23,9 @@
                 dataType: "xml",
                 success: function (data) {
                     $("#get_list_btn").removeClass("btn-primary").addClass("btn-success").text("Success!").unbind("click");
-                    //alert(data);
+                    $(data).find("Book").each(function () {
+                        $("#book-table").append($(this).find("title").text());
+                    });
                     
                 }, error: function () {
                     $("#get_list_btn").removeClass("btn-primary").addClass("btn-danger").text("Error: Try again");
