@@ -18,8 +18,11 @@
     <script>
         $("#get_list_btn").click(function () {
             $.ajax({
-                url: "./books", success: function () {
+                url: "./books",
+                dataType: "xml",
+                success: function (data) {
                     $("#get_list_btn").removeClass("btn-primary").addClass("btn-success").text("Success!").unbind("click");
+                    //alert(data);
                     
                 }, error: function () {
                     $("#get_list_btn").removeClass("btn-primary").addClass("btn-danger").text("Error: Try again");
