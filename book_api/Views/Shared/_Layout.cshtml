@@ -17,7 +17,14 @@
     @RenderSection("scripts", required: false)
     <script>
         $("#get_list_btn").click(function () {
-            alert("works");
+            $.ajax({
+                url: "./books", success: function () {
+                    $("#get_list_btn").removeClass("btn-primary").addClass("btn-success").text("Success!").unbind("click");
+                    
+                }, error: function () {
+                    $("#get_list_btn").removeClass("btn-primary").addClass("btn-danger").text("Error: Try again");
+                }
+            });
         });
     </script>
 </body>
