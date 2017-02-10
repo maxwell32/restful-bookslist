@@ -10,28 +10,32 @@ namespace book_api.Controllers
 {
     public class BooksController : ApiController
     {
-        
-       
-
-        // GET api/values, this needs to return a json or xml of books and their descriptors for tabular data
+        // GET ./books
         public IEnumerable<Book> Get()
         {
             //return list of books
             return populateList();
         }
 
-        // GET api/values/5, for accessing a single book? unneeded but possibly cool
+        // GET ./books/{id}, for accessing a single book in the list
         public Book Get(int id)
         {
+            //temporary copy of the book list
             var tempBookList = populateList();
             
+            //very basic validation of id, if its greater than the size of the list, make it the last element in the list
             if(id > tempBookList.Count-1)
             {
                 id = tempBookList.Count-1;
             }
+            //return the specific book
             return tempBookList.ElementAt(id);
         }
-
+        /*
+         * Create a new list of Book objects
+         * Initialize the list with 3 hard coded books
+         * Return the list 
+         */
         private List<Book> populateList()
         {
             List<Book> bookList = new List<Book>();
@@ -72,6 +76,7 @@ namespace book_api.Controllers
         }
     }
 
+    //class for Book object with setters and getters
     public class Book
     {
         public string title { get; set; }

@@ -19,28 +19,37 @@
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     <script>
+        //hide the book table by default because it has no books in it
         $('#book-table').hide();
+        //create on on click listener for the button to execute the AJAX call
         $("#get_list_btn").click(function () {
+            //create ajax
             $.ajax({
                 url: "./books",
                 dataType: "xml",
                 success: function (data) {
+                    //show the table
                     $("#book-table").show();
+                    //change class of the button and text to 'success'
                     $("#get_list_btn").removeClass("btn-primary").addClass("btn-success").text("Success!").unbind("click");
+                    //remove prompt text at top of the page
                     $("#prompt").remove();
+                    //for each book element in the xml response...
                     $(data).find("Book").each(function () {
+                        //create temp instance variables for each child
                         var authorFName = $(this).find("authorFName").text();
                         var authorLName = $(this).find("authorLName").text();
                         var genre = $(this).find("genre").text();
                         var publisher = $(this).find("publisher").text();
                         var title = $(this).find("title").text();
                         
-                        //create table row
-                        $('<tr></tr>').html('<td>' + title + '</td>' + '<td>' + authorLName + '</td>' + '<td>' + authorLName + '</td>' + '<td>' + genre + '</td>' + '<td>' + publisher + '</td>').appendTo("#book-table");
+                        //create table row using the instance variables to the table
+                        $('<tr></tr>').html('<td>' + title + '</td>' + '<td>' + authorFName + '</td>' + '<td>' + authorLName + '</td>' + '<td>' + genre + '</td>' + '<td>' + publisher + '</td>').appendTo("#book-table");
                     });
-                    
+                // if there was an error with the ajax request let the user know   
                 }, error: function () {
-                    $("#get_list_btn").removeClass("btn-primary").addClass("btn-danger").text("Error: Try again");
+                    $("#prompt").text("There was an error processing your response. Please try again.");
+                    $("#get_list_btn").removeClass("btn-primary").addClass("btn-danger");
                 }
             });
         });

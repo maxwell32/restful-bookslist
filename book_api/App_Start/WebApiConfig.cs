@@ -10,10 +10,10 @@ namespace book_api
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            //defines where the api is routed in the url
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{id}",
