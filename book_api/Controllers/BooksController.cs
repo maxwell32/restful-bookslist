@@ -24,6 +24,11 @@ namespace book_api.Controllers
         public Book Get(int id)
         {
             var tempBookList = populateList();
+            
+            if(id > tempBookList.Count-1)
+            {
+                id = tempBookList.Count-1;
+            }
             return tempBookList.ElementAt(id);
         }
 

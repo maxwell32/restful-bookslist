@@ -10,21 +10,33 @@
 <body>
     <!-- Render index.cshtml -->
     <div class="container">
-        @RenderBody()
+        <div id="table-container">
+            @RenderBody()
+        </div>
     </div>
 
     <!-- Render any included scripts or libraries-->
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     <script>
+        $('#book-table').hide();
         $("#get_list_btn").click(function () {
             $.ajax({
                 url: "./books",
                 dataType: "xml",
                 success: function (data) {
+                    $("#book-table").show();
                     $("#get_list_btn").removeClass("btn-primary").addClass("btn-success").text("Success!").unbind("click");
+                    $("#prompt").remove();
                     $(data).find("Book").each(function () {
-                        $("#book-table").append($(this).find("title").text());
+                        var authorFName = $(this).find("authorFName").text();
+                        var authorLName = $(this).find("authorLName").text();
+                        var genre = $(this).find("genre").text();
+                        var publisher = $(this).find("publisher").text();
+                        var title = $(this).find("title").text();
+                        
+                        //create table row
+                        $('<tr></tr>').html('<td>' + title + '</td>' + '<td>' + authorLName + '</td>' + '<td>' + authorLName + '</td>' + '<td>' + genre + '</td>' + '<td>' + publisher + '</td>').appendTo("#book-table");
                     });
                     
                 }, error: function () {
