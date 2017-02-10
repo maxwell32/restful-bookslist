@@ -4,13 +4,7 @@
 
 Created a two REST API endpoints that responds to GET requests
 returning and XML document with the format:
-<Book>
-  <authorFName />
-  <authorLName />
-  <genre />
-  <publisher />
-  <title />
-</Book>
+Book
 
 #####localhost:XXXXX/books
 Returns the complete list of books
