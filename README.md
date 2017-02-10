@@ -3,7 +3,7 @@
 #####Sample project
 
 Created a two REST API endpoints that responds to GET requests
-with an XML response
+with an XML response, written in ASP.NET 4
   
 
 #####localhost:XXXXX/books
